@@ -64,7 +64,7 @@ const Portfolio = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={transition1}
-        className="text-8xl font-bold text-center mb-8"
+        className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-center mb-8"
       >
         Portfolio
       </motion.h1>
@@ -73,7 +73,7 @@ const Portfolio = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={transition1}
-        className="flex justify-center gap-4 mb-8"
+        className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8"
       >
         {categories.map((category) => (
           <button
@@ -82,7 +82,7 @@ const Portfolio = () => {
               setSelectedCategory(category);
               setVisibleItems(ITEMS_PER_PAGE);
             }}
-            className={`btn ${
+            className={`btn text-sm sm:text-base ${
               selectedCategory === category
                 ? "bg-black text-white"
                 : "bg-gray-100 hover:bg-gray-200 text-gray-800"
@@ -105,13 +105,13 @@ const Portfolio = () => {
             className="fixed top-4 right-4 z-50 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-full p-2 transition-all duration-300"
             aria-label="Close"
           >
-            <IoClose className="h-6 w-6" />
+            <IoClose className="h-4 w-4 sm:h-6 sm:w-6" />
           </button>
         )}
       >
         <motion.div
           layout
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4"
         >
           <AnimatePresence mode="popLayout">
             {displayedImages.map((image, index) => (
@@ -132,7 +132,7 @@ const Portfolio = () => {
                     <img
                       src={image.src}
                       alt={`Gallery ${index + 1}`}
-                      className="w-full h-48 object-cover cursor-pointer rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+                      className="w-full h-32 sm:h-40 md:h-48 object-cover cursor-pointer rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300 rounded-lg" />
@@ -156,7 +156,7 @@ const Portfolio = () => {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
             onClick={loadMore}
-            className="btn bg-black text-white hover:bg-gray-800"
+            className="btn bg-black text-white hover:bg-gray-800 text-sm sm:text-base"
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
           >
@@ -170,7 +170,7 @@ const Portfolio = () => {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
             onClick={seeLess}
-            className="btn bg-gray-200 text-gray-800 hover:bg-gray-300"
+            className="btn bg-gray-200 text-gray-800 hover:bg-gray-300 text-sm sm:text-base"
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
           >

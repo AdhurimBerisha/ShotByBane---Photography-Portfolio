@@ -13,38 +13,46 @@ const Contact = () => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: "100%" }}
       transition={transition1}
-      className="section"
+      className="section min-h-screen py-20"
     >
-      <div className="container mx-auto h-full">
-        <div className="flex flex-col lg:flex-row h-full items-center justify-start pt-36 gap-x-8 text-center lg:text-left">
+      <div className="container mx-auto">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24 pt-96 sm:pt-[32rem] md:pt-[10rem] lg:pt-0">
           {/* text & form */}
           <div
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
-            className="lg:flex-1 lg:pt-32 px-4"
+            className="w-full lg:w-1/2 px-4 lg:px-0"
           >
-            <h1 className="h1">Contact me</h1>
-            <p className="mb-12">I would love to get suggestions from you.</p>
+            <h1 className="h1 text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 lg:mb-8">
+              Contact me
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl mb-8 lg:mb-12 text-gray-600">
+              I would love to get suggestions from you.
+            </p>
             {/* form */}
-            <form className="flex flex-col gap-y-4">
-              <div className="flex gap-x-10">
+            <form className="flex flex-col gap-y-6">
+              <div className="flex flex-col sm:flex-row gap-y-6 sm:gap-x-8">
                 <input
-                  className="outline-none border-b border-b-primary h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879]"
+                  className="outline-none border-b border-b-primary h-[50px] sm:h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879] text-sm sm:text-base"
                   type="text"
                   placeholder="Your name"
                 />
                 <input
-                  className="outline-none border-b border-b-primary h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879]"
+                  className="outline-none border-b border-b-primary h-[50px] sm:h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879] text-sm sm:text-base"
                   type="text"
                   placeholder="Your email address"
                 />
               </div>
               <input
-                className="outline-none border-b border-b-primary h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879]"
+                className="outline-none border-b border-b-primary h-[50px] sm:h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879] text-sm sm:text-base"
                 type="text"
                 placeholder="Your message"
               />
-              <button className="btn mb-[30px] mx-auto lg:mx-0 self-start">
+              <button
+                className="btn w-full sm:w-auto text-sm sm:text-base px-8 py-3 mt-4"
+                onMouseEnter={mouseEnterHandler}
+                onMouseLeave={mouseLeaveHandler}
+              >
                 Send it
               </button>
             </form>
@@ -57,10 +65,14 @@ const Contact = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "100%" }}
             transition={{ transition: transition1, duration: 1.5 }}
-            className="lg:flex-1"
+            className="w-full lg:w-1/2 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]"
           >
-            <div className="bg-[#eef7f9]">
-              <img src="/images/contact/woman.png" alt="" />
+            <div className="bg-[#eef7f9] h-full w-full rounded-lg overflow-hidden">
+              <img
+                src="/images/contact/woman.png"
+                alt="Contact"
+                className="w-full h-full object-contain"
+              />
             </div>
           </motion.div>
         </div>
