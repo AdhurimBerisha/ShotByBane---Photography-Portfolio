@@ -9,7 +9,7 @@ const About = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -20,7 +20,7 @@ const About = () => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: "100%" }}
       transition={transition1}
-      className="section"
+      className="section "
     >
       <div
         onMouseEnter={mouseEnterHandler}
@@ -28,7 +28,7 @@ const About = () => {
         className="container mx-auto h-full relative"
       >
         {/* text & img wrapper */}
-        <div className="flex flex-col lg:flex-row h-full items-center justify-center gap-x-24 text-center lg:text-left lg:pt-16">
+        <div className="flex flex-col lg:flex-row h-full items-center justify-center gap-x-24 text-center lg:text-left -ml-10 lg:pt-16">
           {/* image */}
           <div className="flex-1 max-h-96 lg:max-h-max order-2 lg:order-none overflow-hidden">
             <img src="/images/about/woman.png" alt="" />
@@ -53,8 +53,8 @@ const About = () => {
               Experienced Photographer working in the photography and creative
               industries.
             </p>
-            <button 
-              onClick={() => scrollToSection('portfolio')} 
+            <button
+              onClick={() => scrollToSection("portfolio")}
               className="btn"
             >
               View my work
