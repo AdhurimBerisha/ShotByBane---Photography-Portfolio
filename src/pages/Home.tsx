@@ -1,4 +1,4 @@
 const Home = () => {
-  return <div>Home</div>;
+  return <section className="section bg-blue-200">Home</section>;
 };
 export default Home;
