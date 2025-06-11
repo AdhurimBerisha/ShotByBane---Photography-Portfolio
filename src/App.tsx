@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Portfolio from "./pages/Portfolio";
+import Packages from "./pages/Packages";
 import Contact from "./pages/Contact";
 import { motion } from "framer-motion";
 import { CursorContext } from "./context/CursorContext";
@@ -13,10 +14,11 @@ const App = () => {
   return (
     <>
       <Header />
-      <main className="relative bt">
+      <main className="relative">
         <Home />
         <About />
         <Portfolio />
+        <Packages />
         <Contact />
       </main>
       {/* cursor */}

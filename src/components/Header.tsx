@@ -11,41 +11,41 @@ const Header = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   useEffect(() => {
     const controlNavbar = () => {
       const currentScrollY = window.scrollY;
-      
-      if (currentScrollY > lastScrollY) { 
+
+      if (currentScrollY > lastScrollY) {
         setIsVisible(false);
-      } else { 
+      } else {
         setIsVisible(true);
       }
 
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', controlNavbar);
+    window.addEventListener("scroll", controlNavbar);
 
     return () => {
-      window.removeEventListener('scroll', controlNavbar);
+      window.removeEventListener("scroll", controlNavbar);
     };
   }, [lastScrollY]);
 
   return (
-    <header 
+    <header
       className={`fixed w-full px-[30px] lg:px-[100px] z-30 h-[100px] lg:h-[140px] flex items-center transition-transform duration-300 ${
-        isVisible ? 'translate-y-0' : '-translate-y-full'
+        isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       <div className="flex flex-col lg:flex-row lg:items-center w-full justify-between">
         <button
           onMouseEnter={mouseEnterHandler}
           onMouseLeave={mouseLeaveHandler}
-          onClick={() => scrollToSection('home')}
+          onClick={() => scrollToSection("home")}
           className="max-w-[200px]"
         >
           <img src="/images/header/logo.svg" alt="" />
@@ -56,25 +56,31 @@ const Header = () => {
           onMouseLeave={mouseLeaveHandler}
         >
           <button
-            onClick={() => scrollToSection('home')}
+            onClick={() => scrollToSection("home")}
             className="text-[#696c6d] hover:text-primary transition"
           >
             Home
           </button>
           <button
-            onClick={() => scrollToSection('about')}
+            onClick={() => scrollToSection("about")}
             className="text-[#696c6d] hover:text-primary transition"
           >
             About
           </button>
           <button
-            onClick={() => scrollToSection('portfolio')}
+            onClick={() => scrollToSection("portfolio")}
             className="text-[#696c6d] hover:text-primary transition"
           >
             Portfolio
           </button>
           <button
-            onClick={() => scrollToSection('contact')}
+            onClick={() => scrollToSection("packages")}
+            className="text-[#696c6d] hover:text-primary transition"
+          >
+            Packages
+          </button>
+          <button
+            onClick={() => scrollToSection("contact")}
             className="text-[#696c6d] hover:text-primary transition"
           >
             Contact
