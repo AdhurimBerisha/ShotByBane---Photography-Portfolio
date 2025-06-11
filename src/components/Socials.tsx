@@ -1,11 +1,20 @@
+import { useContext } from "react";
 import { FaTiktok, FaFacebook, FaPinterest, FaInstagram } from "react-icons/fa";
 
+import { CursorContext } from "../context/CursorContext";
+
 const Socials = () => {
+  const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
+
   return (
-    <div className="hidden xl:flex ml-24">
+    <div
+      onMouseEnter={mouseEnterHandler}
+      onMouseLeave={mouseLeaveHandler}
+      className="hidden xl:flex ml-24"
+    >
       <ul className="flex gap-x-4">
         <li>
-          <a href="http://www.instagram.com" target="_blank">
+          <a href="http://wwww.instagram.com" target="_blank">
             <FaInstagram />
           </a>
         </li>
@@ -28,4 +37,5 @@ const Socials = () => {
     </div>
   );
 };
+
 export default Socials;
