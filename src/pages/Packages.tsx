@@ -3,6 +3,13 @@ import { transition1 } from "../transition";
 import { useContext } from "react";
 import { CursorContext } from "../context/CursorContext";
 
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
 const Pricing = () => {
   const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
   const packages = [
@@ -96,6 +103,7 @@ const Pricing = () => {
                   </ul>
                 </div>
                 <button
+                  onClick={() => scrollToSection("contact")}
                   className="py-3 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors duration-300 mt-auto w-[200px] mx-auto"
                   onMouseEnter={mouseEnterHandler}
                   onMouseLeave={mouseLeaveHandler}
