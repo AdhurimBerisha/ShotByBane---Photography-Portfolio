@@ -1,9 +1,4 @@
-import WomanImg from "../../public/images/home/woman.png";
-
-import { Link } from "react-router-dom";
-
-import React, { useContext } from "react";
-
+import { useContext } from "react";
 import { motion } from "framer-motion";
 import { transition1 } from "../transition";
 import { CursorContext } from "../context/CursorContext";
@@ -11,8 +6,16 @@ import { CursorContext } from "../context/CursorContext";
 const Home = () => {
   const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <motion.section
+      id="home"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -38,9 +41,12 @@ const Home = () => {
             <p className="text-[26px] lg:text-[36px] font-primary mb-4 lg:mb-12">
               Los Angeles, USA
             </p>
-            <Link to={"/contact"} className="btn mb-[30px]">
+            <button 
+              onClick={() => scrollToSection('contact')} 
+              className="btn mb-[30px]"
+            >
               hire me
-            </Link>
+            </button>
           </motion.div>
           {/* image */}
           <div className="flex justify-end max-h-96 lg:max-h-max">
@@ -50,11 +56,13 @@ const Home = () => {
               exit={{ scale: 0 }}
               transition={transition1}
               className="relative lg:-right-40 overflow-hidden"
+              onMouseEnter={mouseEnterHandler}
+              onMouseLeave={mouseLeaveHandler}
             >
               <motion.img
                 whileHover={{ scale: 1.1 }}
                 transition={transition1}
-                src={WomanImg}
+                src="/images/home/woman.png"
                 alt=""
               />
             </motion.div>

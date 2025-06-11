@@ -1,60 +1,87 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import Socials from "./Socials";
-import Logo from "../../public/images/header/logo.svg";
 import MobileNav from "./MobileNav";
-import { Link } from "react-router-dom";
 import { CursorContext } from "../context/CursorContext";
 
 const Header = () => {
   const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    const controlNavbar = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY) { 
+        setIsVisible(false);
+      } else { 
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', controlNavbar);
+
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
+    };
+  }, [lastScrollY]);
 
   return (
-    <header className="fixed w-full px-[30px] lg:px-[100px] z-30 h-[100px] lg:h-[140px] flex items-center">
+    <header 
+      className={`fixed w-full px-[30px] lg:px-[100px] z-30 h-[100px] lg:h-[140px] flex items-center transition-transform duration-300 ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
       <div className="flex flex-col lg:flex-row lg:items-center w-full justify-between">
-        {/* logo */}
-        <Link
+        <button
           onMouseEnter={mouseEnterHandler}
           onMouseLeave={mouseLeaveHandler}
-          to={"/"}
+          onClick={() => scrollToSection('home')}
           className="max-w-[200px]"
         >
-          <img src={Logo} alt="" />
-        </Link>
-        {/* nav - initially hidden - show on desktop mode */}
+          <img src="/images/header/logo.svg" alt="" />
+        </button>
         <nav
           className="hidden xl:flex gap-x-12 font-semibold"
           onMouseEnter={mouseEnterHandler}
           onMouseLeave={mouseLeaveHandler}
         >
-          <Link
-            to={"/"}
+          <button
+            onClick={() => scrollToSection('home')}
             className="text-[#696c6d] hover:text-primary transition"
           >
             Home
-          </Link>
-          <Link
-            to={"/about"}
+          </button>
+          <button
+            onClick={() => scrollToSection('about')}
             className="text-[#696c6d] hover:text-primary transition"
           >
             About
-          </Link>
-          <Link
-            to={"/portfolio"}
+          </button>
+          <button
+            onClick={() => scrollToSection('portfolio')}
             className="text-[#696c6d] hover:text-primary transition"
           >
-            Porftolio
-          </Link>
-          <Link
-            to={"/contact"}
+            Portfolio
+          </button>
+          <button
+            onClick={() => scrollToSection('contact')}
             className="text-[#696c6d] hover:text-primary transition"
           >
             Contact
-          </Link>
+          </button>
         </nav>
       </div>
-      {/* socials */}
       <Socials />
-      {/* mobile nav */}
       <MobileNav />
     </header>
   );

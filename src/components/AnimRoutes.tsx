@@ -1,11 +1,8 @@
-import React from "react";
-// import pages
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Portfolio from "../pages/Portfolio";
 import Contact from "../pages/Contact";
 
-// import routes route & useLocation hook
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 

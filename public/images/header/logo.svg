@@ -1,14 +1,9 @@
 <svg width="200" height="60" xmlns="http://www.w3.org/2000/svg" fill="none">
- <defs>
-  <linearGradient y2="0" x2="1" y1="0" x1="0" id="svg_10">
-   <stop offset="0" stop-color="#4c4c4c"/>
-   <stop offset="1" stop-color="#b3b3b3"/>
-  </linearGradient>
- </defs>
  <g>
   <title>Layer 1</title>
-  <path id="svg_1" d="m30,58c-15.46961,0 -28,-12.53039 -28,-28c0,-15.46961 12.53039,-28 28,-28c15.46961,0 28,12.53039 28,28c0,15.46961 -12.53039,28 -28,28z" opacity="undefined" fill="url(#svg_10)"/>
-  <text transform="matrix(1.44826 0 0 1.3075 136.264 -22.1777)" stroke="null" id="svg_2" font-family="'Hepta Slab'" fill="#333333" font-size="28" text-anchor="middle" y="49.11665" x="-73.38255">A</text>
-  <text style="cursor: move;" transform="matrix(0.747625 0 0 1 11.9162 0)" stroke="null" id="svg_3" font-family="'Hepta Slab'" fill="#333333" font-size="24" y="37.78588" x="75.25121">Alban Abazi</text>
+  <path fill="#000000" opacity="undefined" d="m29,57c-15.46961,0 -28,-12.53039 -28,-28c0,-15.46961 12.53039,-28 28,-28c15.46961,0 28,12.53039 28,28c0,15.46961 -12.53039,28 -28,28z" id="svg_1"/>
+  <text x="-73.38255" y="48.35184" text-anchor="middle" font-size="30" fill="#ffffff" font-family="'Bitter'" id="svg_2" stroke="null" transform="matrix(1.44826 0 0 1.3075 136.264 -22.1777)">A</text>
+  <text x="61.26027" y="40.93871" font-size="34" fill="#333333" font-family="'Bitter'" id="svg_3" stroke="null" transform="matrix(0.747625 0 0 1 11.9162 0)" font-style="normal" font-weight="bold">Alban Abazi</text>
  </g>
+
 </svg>

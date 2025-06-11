@@ -1,8 +1,6 @@
 import { useContext } from "react";
-import WomanImg from "../../public/images/contact/woman.png";
 import { motion } from "framer-motion";
 import { transition1 } from "../transition";
-
 import { CursorContext } from "../context/CursorContext";
 
 const Contact = () => {
@@ -10,22 +8,15 @@ const Contact = () => {
 
   return (
     <motion.section
+      id="contact"
       initial={{ opacity: 0, y: "100%" }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: "100%" }}
       transition={transition1}
-      className="section bg-white"
+      className="section"
     >
       <div className="container mx-auto h-full">
         <div className="flex flex-col lg:flex-row h-full items-center justify-start pt-36 gap-x-8 text-center lg:text-left">
-          {/* bg */}
-          <motion.div
-            initial={{ opacity: 0, y: "100%" }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: "100%" }}
-            transition={transition1}
-            className="hidden lg:flex bg-[#eef7f9] absolute bottom-0 left-0 right-0 top-72 -z-10"
-          ></motion.div>
           {/* text & form */}
           <div
             onMouseEnter={mouseEnterHandler}
@@ -68,7 +59,9 @@ const Contact = () => {
             transition={{ transition: transition1, duration: 1.5 }}
             className="lg:flex-1"
           >
-            <img src={WomanImg} alt="" />
+            <div className="bg-[#eef7f9]">
+              <img src="/images/contact/woman.png" alt="" />
+            </div>
           </motion.div>
         </div>
       </div>

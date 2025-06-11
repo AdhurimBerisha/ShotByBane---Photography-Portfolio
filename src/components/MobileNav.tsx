@@ -1,6 +1,5 @@
 import { IoMdClose } from "react-icons/io";
 import { CgMenuRight } from "react-icons/cg";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -18,6 +17,15 @@ const menuVariants = {
 
 const MobileNav = () => {
   const [openMenu, setOpenMenu] = useState(false);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setOpenMenu(false);
+    }
+  };
+
   return (
     <nav className="text-primary xl:hidden">
       {/* nav open button */}
@@ -44,16 +52,16 @@ const MobileNav = () => {
         {/* menu list */}
         <ul className="h-full flex flex-col justify-center items-center gap-y-8 gap-y-8 text-primary font-primary font-bold text-3xl">
           <li>
-            <Link to={"/"}>Home</Link>
+            <button onClick={() => scrollToSection('home')}>Home</button>
           </li>
           <li>
-            <Link to={"/about"}>About</Link>
+            <button onClick={() => scrollToSection('about')}>About</button>
           </li>
           <li>
-            <Link to={"/portfolio"}>Portfolio</Link>
+            <button onClick={() => scrollToSection('portfolio')}>Portfolio</button>
           </li>
           <li>
-            <Link to={"/contact"}>Contact</Link>
+            <button onClick={() => scrollToSection('contact')}>Contact</button>
           </li>
         </ul>
       </motion.div>

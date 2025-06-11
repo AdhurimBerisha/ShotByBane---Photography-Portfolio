@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import Header from "./components/Header";
-import AnimRoutes from "./components/AnimRoutes";
-import { BrowserRouter as Router } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Portfolio from "./pages/Portfolio";
+import Contact from "./pages/Contact";
 import { motion } from "framer-motion";
 import { CursorContext } from "./context/CursorContext";
 
@@ -10,10 +12,13 @@ const App = () => {
 
   return (
     <>
-      <Router>
-        <Header />
-        <AnimRoutes />
-      </Router>
+      <Header />
+      <main className="relative bt">
+        <Home />
+        <About />
+        <Portfolio />
+        <Contact />
+      </main>
       {/* cursor */}
       <motion.div
         variants={cursorVariants}
