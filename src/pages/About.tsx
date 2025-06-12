@@ -20,7 +20,7 @@ const About = () => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: "100%" }}
       transition={transition1}
-      className="section "
+      className="w-full h-auto lg:h-screen"
     >
       <div
         onMouseEnter={mouseEnterHandler}
@@ -28,11 +28,11 @@ const About = () => {
         className="container mx-auto h-full relative"
       >
         {/* text & img wrapper */}
-        <div className="flex flex-col lg:flex-row h-full items-center justify-center gap-x-8 lg:gap-x-24 text-center lg:text-left px-4 sm:px-6 md:px-8 lg:px-0 lg:pt-16 min-h-screen">
+        <div className="flex flex-col lg:flex-row h-full items-center justify-center gap-x-8 lg:gap-x-24 text-center lg:text-left px-4 sm:px-6 md:px-8 lg:px-0 lg:pt-16">
           {/* image */}
           <div className="flex-1 w-full lg:w-auto h-[300px] sm:h-[400px] md:h-[500px] lg:h-full order-2 lg:order-none overflow-hidden">
             <img
-              src="/images/about/woman.png"
+              src="/images/about/About.jpg"
               alt=""
               className="w-full h-full object-contain"
             />
@@ -61,7 +61,7 @@ const About = () => {
             </p>
             <button
               onClick={() => scrollToSection("portfolio")}
-              className="btn text-sm sm:text-base"
+              className="btn text-sm sm:text-base mb-10"
             >
               View my work
             </button>

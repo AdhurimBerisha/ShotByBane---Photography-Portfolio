@@ -57,31 +57,31 @@ const Header = () => {
         >
           <button
             onClick={() => scrollToSection("home")}
-            className="text-[#696c6d] hover:text-primary transition"
+            className="text-black hover:text-primary transition"
           >
             Home
           </button>
           <button
             onClick={() => scrollToSection("about")}
-            className="text-[#696c6d] hover:text-primary transition"
+            className="text-black hover:text-primary transition"
           >
             About
           </button>
           <button
             onClick={() => scrollToSection("portfolio")}
-            className="text-[#696c6d] hover:text-primary transition"
+            className="text-black hover:text-primary transition"
           >
             Portfolio
           </button>
           <button
             onClick={() => scrollToSection("packages")}
-            className="text-[#696c6d] hover:text-primary transition"
+            className="text-black hover:text-primary transition"
           >
             Packages
           </button>
           <button
             onClick={() => scrollToSection("contact")}
-            className="text-[#696c6d] hover:text-primary transition"
+            className="text-black hover:text-primary transition"
           >
             Contact
           </button>

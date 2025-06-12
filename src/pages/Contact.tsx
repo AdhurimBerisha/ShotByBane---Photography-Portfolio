@@ -67,9 +67,9 @@ const Contact = () => {
             transition={{ transition: transition1, duration: 1.5 }}
             className="w-full lg:w-1/2 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]"
           >
-            <div className="bg-[#eef7f9] h-full w-full rounded-lg overflow-hidden">
+            <div className=" h-full w-full rounded-lg overflow-hidden">
               <img
-                src="/images/contact/woman.png"
+                src="/images/contact/Contact.jpg"
                 alt="Contact"
                 className="w-full h-full object-contain"
               />
