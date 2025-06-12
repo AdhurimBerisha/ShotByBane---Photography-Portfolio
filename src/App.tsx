@@ -1,10 +1,13 @@
 import { useContext } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Portfolio from "./pages/Portfolio";
 import Packages from "./pages/Packages";
 import Contact from "./pages/Contact";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
 import { motion } from "framer-motion";
 import { CursorContext } from "./context/CursorContext";
 
@@ -13,14 +16,25 @@ const App = () => {
 
   return (
     <>
-      <Header />
-      <main className="relative">
-        <Home />
-        <About />
-        <Portfolio />
-        <Packages />
-        <Contact />
-      </main>
+      <Routes>
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <Header />
+              <main className="relative">
+                <Home />
+                <About />
+                <Portfolio />
+                <Packages />
+                <Contact />
+              </main>
+            </>
+          }
+        />
+      </Routes>
       {/* cursor */}
       <motion.div
         variants={cursorVariants}
