@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
 import { transition1 } from "../transition";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CursorContext } from "../context/CursorContext";
+import {
+  getAllPackages,
+  subscribeToPackages,
+  type Package,
+} from "../services/apiPackages";
 
 const scrollToSection = (sectionId: string) => {
   const element = document.getElementById(sectionId);
@@ -12,44 +17,49 @@ const scrollToSection = (sectionId: string) => {
 
 const Pricing = () => {
   const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
-  const packages = [
-    {
-      name: "Starter",
-      price: "$299",
-      features: [
-        "2 Hour Photo Session",
-        "20 Digital Images",
-        "Basic Editing",
-        "Online Gallery",
-      ],
-      popular: false,
-    },
-    {
-      name: "Intermediate",
-      price: "$499",
-      features: [
-        "4 Hour Photo Session",
-        "40 Digital Images",
-        "Advanced Editing",
-        "Online Gallery",
-        "2 Outfit Changes",
-      ],
-      popular: true,
-    },
-    {
-      name: "Professional",
-      price: "$799",
-      features: [
-        "Full Day Session",
-        "80 Digital Images",
-        "Premium Editing",
-        "Online Gallery",
-        "Unlimited Outfits",
-        "Priority Delivery",
-      ],
-      popular: false,
-    },
-  ];
+  const [packages, setPackages] = useState<Package[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchPackages();
+
+    // Subscribe to package changes
+    const subscription = subscribeToPackages((payload) => {
+      console.log("Package change:", payload);
+      fetchPackages(); // Refresh packages when changes occur
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const fetchPackages = async () => {
+    try {
+      setLoading(true);
+      const data = await getAllPackages();
+      setPackages(data);
+      setError(null);
+    } catch (err) {
+      console.error("Error fetching packages:", err);
+      setError("Failed to load packages");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className="text-red-500 text-center p-4">{error}</div>;
+  }
 
   return (
     <motion.section
@@ -76,26 +86,19 @@ const Pricing = () => {
         >
           {packages.map((pkg, index) => (
             <motion.div
-              key={index}
+              key={pkg.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 * (index + 1) }}
-              className={`bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8 hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] sm:h-[450px] lg:h-[500px] ${
-                pkg.popular ? "transform scale-105 relative" : ""
-              }`}
+              className="bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8 hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] sm:h-[450px] lg:h-[500px]"
             >
-              {pkg.popular && (
-                <div className="absolute top-0 right-0 bg-primary text-white px-3 py-1 sm:px-4 sm:py-1 rounded-bl-lg text-sm sm:text-base">
-                  Popular
-                </div>
-              )}
               <div className="flex flex-col h-full">
                 <div>
                   <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4">
                     {pkg.name}
                   </h3>
                   <div className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
-                    {pkg.price}
+                    €{pkg.price}
                   </div>
                   <ul className="space-y-2 sm:space-y-4 text-sm sm:text-base">
                     {pkg.features.map((feature, featureIndex) => (
