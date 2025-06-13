@@ -1,10 +1,9 @@
-// tailwind.config.js or tailwind.config.mjs
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     fontFamily: {
-      primary: "Playfair Display",
-      secondary: "Mulish",
+      primary: ["Outfit", "sans-serif"],
+      secondary: ["Roboto Condensed", "sans-serif"],
     },
     screens: {
       sm: "640px",
