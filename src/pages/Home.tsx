@@ -36,7 +36,7 @@ const Home = () => {
             className="w-full px-4 sm:px-6 md:px-8 pt-24 sm:pt-28 md:pt-32 lg:pt-0 pb-14 lg:pb-0 lg:w-auto z-10 lg:absolute flex flex-col justify-center items-center lg:items-start"
           >
             <h1 className="h1 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
-              photographer <br /> & film maker
+              photographer <br /> & Editor
             </h1>
             <p className="text-xl sm:text-2xl md:text-3xl lg:text-[36px] font-primary mb-4 lg:mb-12 flex items-center gap-2">
               Pristina, Kosovo

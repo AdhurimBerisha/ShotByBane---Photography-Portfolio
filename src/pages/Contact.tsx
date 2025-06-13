@@ -27,7 +27,7 @@ const Contact = () => {
               Contact me
             </h1>
             <p className="text-base sm:text-lg md:text-xl mb-8 lg:mb-12 text-gray-600">
-              I would love to get suggestions from you.
+              Interested in a plan? Reach out and i’ll be happy to help
             </p>
             {/* form */}
             <form className="flex flex-col gap-y-6">

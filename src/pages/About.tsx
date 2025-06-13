@@ -49,15 +49,13 @@ const About = () => {
               About me
             </h1>
             <p className="mb-8 sm:mb-10 lg:mb-12 max-w-sm text-sm sm:text-base md:text-lg">
-              Photography is all about the process. It is about making her
-              clients comfortable in front of the camera and giving them that
-              boost of confidence.
-              <b> Headshot Photography, </b> has become increasingly important
-              in the social media and digital age.
-              <br />
-              <br />
-              Experienced Photographer working in the photography and creative
-              industries.
+              Photography is all about the journey — creating a comfortable
+              atmosphere for clients and helping them feel confident in front of
+              the camera.
+              <strong>Creative photography</strong> has become more essential
+              than ever in today’s digital and social media-driven world. With
+              years of experience in photography and the creative industry, I
+              bring a professional and genuine approach to every shoot.
             </p>
             <button
               onClick={() => scrollToSection("portfolio")}
