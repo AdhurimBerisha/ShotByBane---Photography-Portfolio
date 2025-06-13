@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import { supabase } from "../supabase/supabaseClient";
 import { createImage } from "../services/apiImages";
+import { motion } from "framer-motion";
+import { transition1 } from "../transition";
 
 interface AddImageFormProps {
   CATEGORIES: string[];
@@ -39,7 +41,6 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
     const fileName = `${Date.now()}_${file.name}`;
 
     try {
-      // 1. Upload the file to storage
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from("images")
         .upload(fileName, file, { cacheControl: "3600", upsert: false });
@@ -48,7 +49,6 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
         throw new Error(`Image upload failed: ${uploadError.message}`);
       }
 
-      // 2. Get the public URL
       const { data: publicUrlData } = supabase.storage
         .from("images")
         .getPublicUrl(uploadData.path);
@@ -56,7 +56,6 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
       console.log("Uploaded file path:", uploadData.path);
       console.log("Public URL data:", publicUrlData);
 
-      // 3. Save the image information to the database using our API
       const savedImage = await createImage({
         title: newImage.title,
         description: newImage.description,
@@ -66,7 +65,6 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
 
       console.log("Saved image data:", savedImage);
 
-      // Reset form
       setNewImage({
         title: "",
         description: "",
@@ -87,16 +85,23 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
-      <h2 className="text-2xl font-bold mb-4">Add New Image</h2>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={transition1}
+      className="bg-white p-4 sm:p-6 lg:p-8 rounded-lg shadow-lg"
+    >
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 sm:mb-8">
+        Add New Image
+      </h2>
       {error && (
-        <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-md">
+        <div className="mb-6 p-3 sm:p-4 bg-red-50 text-red-700 rounded-lg border border-red-200 text-sm sm:text-base">
           {error}
         </div>
       )}
-      <form onSubmit={handleAddImage} className="space-y-4">
+      <form onSubmit={handleAddImage} className="space-y-4 sm:space-y-6">
         <div>
-          <label className="block text-sm font-medium text-primary mb-2">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             Title
           </label>
           <input
@@ -105,12 +110,12 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
             onChange={(e) =>
               setNewImage({ ...newImage, title: e.target.value })
             }
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300 text-sm sm:text-base"
             required
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-primary mb-2">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             Description
           </label>
           <textarea
@@ -118,12 +123,12 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
             onChange={(e) =>
               setNewImage({ ...newImage, description: e.target.value })
             }
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300 text-sm sm:text-base"
             rows={3}
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-primary mb-2">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             Category
           </label>
           <select
@@ -131,7 +136,7 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
             onChange={(e) =>
               setNewImage({ ...newImage, category: e.target.value })
             }
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300 bg-white text-sm sm:text-base"
             required
           >
             {CATEGORIES.map((category) => (
@@ -142,7 +147,7 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-primary mb-2">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             Upload Image
           </label>
           <input
@@ -150,27 +155,31 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
             accept="image/*"
             onChange={handleFileChange}
             ref={fileInputRef}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300 text-sm sm:text-base file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-black file:text-white hover:file:bg-gray-800"
             required
           />
           {imagePreviewUrl && (
             <div className="mt-4">
-              <p className="block text-sm font-medium text-primary mb-2">
+              <p className="block text-sm font-medium text-gray-700 mb-2">
                 Image Preview:
               </p>
               <img
                 src={imagePreviewUrl}
                 alt="Image Preview"
-                className="max-w-xs h-auto rounded-md shadow"
+                className="max-w-full sm:max-w-xs h-auto rounded-lg shadow-md"
               />
             </div>
           )}
         </div>
-        <button type="submit" className="btn" disabled={isUploading}>
+        <button
+          type="submit"
+          disabled={isUploading}
+          className="w-full px-4 sm:px-6 py-2 sm:py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+        >
           {isUploading ? "Uploading..." : "Add Image"}
         </button>
       </form>
-    </div>
+    </motion.div>
   );
 };
 

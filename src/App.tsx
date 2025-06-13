@@ -10,6 +10,7 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import { motion } from "framer-motion";
 import { CursorContext } from "./context/CursorContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   const { cursorVariants, cursorBG } = useContext(CursorContext)!;
@@ -18,7 +19,14 @@ const App = () => {
     <>
       <Routes>
         <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/"
           element={

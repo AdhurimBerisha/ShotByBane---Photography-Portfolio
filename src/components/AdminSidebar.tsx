@@ -1,6 +1,9 @@
 import React from "react";
 import { FaPlusSquare, FaImages, FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { transition1 } from "../transition";
+import { supabase } from "../supabase/supabaseClient";
 
 interface AdminSidebarProps {
   activeTab: number;
@@ -12,14 +15,23 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
   setActiveTab,
 }) => {
   const navigate = useNavigate();
-  const handleLogout = () => {
-    // In a real application, you would implement your logout logic here,
-    // e.g., clearing local storage, redirecting to login page, calling an API.
-    navigate("/admin");
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      navigate("/admin");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
   };
 
   return (
-    <div className="w-full h-full bg-white rounded-lg shadow-md py-4 flex flex-col justify-between">
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={transition1}
+      className="w-full h-full bg-white py-4 flex flex-col justify-between"
+    >
       {/* Logo Section */}
       <div className="flex justify-center items-center py-6 px-4 mb-4">
         <img
@@ -32,10 +44,10 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
       <nav className="space-y-2 px-4 flex-1">
         <button
           onClick={() => setActiveTab(0)}
-          className={`flex items-center w-full p-2 rounded-md transition-colors duration-200
+          className={`flex items-center w-full p-3 rounded-lg transition-all duration-300
             ${
               activeTab === 0
-                ? "bg-blue-100 text-blue-700"
+                ? "bg-black text-white"
                 : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
             }`}
         >
@@ -44,10 +56,10 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
         </button>
         <button
           onClick={() => setActiveTab(1)}
-          className={`flex items-center w-full p-2 rounded-md transition-colors duration-200
+          className={`flex items-center w-full p-3 rounded-lg transition-all duration-300
             ${
               activeTab === 1
-                ? "bg-blue-100 text-blue-700"
+                ? "bg-black text-white"
                 : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
             }`}
         >
@@ -57,16 +69,16 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
       </nav>
 
       {/* Logout Button */}
-      <div className="mt-auto px-4 py-2">
+      <div className="px-4 pb-4">
         <button
           onClick={handleLogout}
-          className="flex items-center w-full p-2 rounded-md text-red-600 hover:bg-red-100 hover:text-red-800 transition-colors duration-200"
+          className="flex items-center w-full p-3 rounded-lg text-red-600 hover:bg-red-50 hover:text-red-800 transition-all duration-300"
         >
           <FaSignOutAlt className="mr-3 text-lg" />
           <span className="font-medium">Logout</span>
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
