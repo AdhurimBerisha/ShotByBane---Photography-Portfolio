@@ -2,9 +2,11 @@ import { useContext } from "react";
 import { motion } from "framer-motion";
 import { transition1 } from "../transition";
 import { CursorContext } from "../context/CursorContext";
+import { usePackage } from "../context/PackageContext";
 
 const Contact = () => {
   const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
+  const { selectedPackage } = usePackage();
 
   return (
     <motion.section
@@ -27,7 +29,7 @@ const Contact = () => {
               Contact me
             </h1>
             <p className="text-base sm:text-lg md:text-xl mb-8 lg:mb-12 text-gray-600">
-              Interested in a plan? Reach out and i’ll be happy to help
+              Interested in a plan? Reach out and i'll be happy to help
             </p>
             {/* form */}
             <form className="flex flex-col gap-y-6">
@@ -43,6 +45,25 @@ const Contact = () => {
                   placeholder="Your email address"
                 />
               </div>
+              {selectedPackage && (
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h3 className="font-bold mb-2">Selected Package:</h3>
+                  <p className="text-lg font-semibold">
+                    {selectedPackage.name}
+                  </p>
+                  <p className="text-primary font-bold">
+                    €{selectedPackage.price}
+                  </p>
+                  <ul className="mt-2 space-y-1">
+                    {selectedPackage.features.map((feature, index) => (
+                      <li key={index} className="flex items-center text-sm">
+                        <span className="mr-2">✓</span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               <input
                 className="outline-none border-b border-b-primary h-[50px] sm:h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879] text-sm sm:text-base"
                 type="text"

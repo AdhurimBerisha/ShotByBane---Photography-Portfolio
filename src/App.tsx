@@ -10,13 +10,14 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import { motion } from "framer-motion";
 import { CursorContext } from "./context/CursorContext";
+import { PackageProvider } from "./context/PackageContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   const { cursorVariants, cursorBG } = useContext(CursorContext)!;
 
   return (
-    <>
+    <PackageProvider>
       <Routes>
         <Route path="/admin" element={<AdminLogin />} />
         <Route
@@ -49,7 +50,7 @@ const App = () => {
         animate={cursorBG}
         className="w-[32px] h-[32px] bg-primary fixed top-0 left-0 pointer-events-none z-50 rounded-full"
       ></motion.div>
-    </>
+    </PackageProvider>
   );
 };
 

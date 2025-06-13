@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { transition1 } from "../transition";
 import { useContext, useState, useEffect } from "react";
 import { CursorContext } from "../context/CursorContext";
+import { usePackage } from "../context/PackageContext";
 import {
   getAllPackages,
   subscribeToPackages,
@@ -17,6 +18,7 @@ const scrollToSection = (sectionId: string) => {
 
 const Pricing = () => {
   const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
+  const { setSelectedPackage } = usePackage();
   const [packages, setPackages] = useState<Package[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -47,6 +49,11 @@ const Pricing = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handlePackageSelect = (pkg: Package) => {
+    setSelectedPackage(pkg);
+    scrollToSection("contact");
   };
 
   if (loading) {
@@ -110,7 +117,7 @@ const Pricing = () => {
                   </ul>
                 </div>
                 <button
-                  onClick={() => scrollToSection("contact")}
+                  onClick={() => handlePackageSelect(pkg)}
                   className="py-2 sm:py-3 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors duration-300 mt-auto w-[160px] sm:w-[200px] mx-auto text-sm sm:text-base"
                   onMouseEnter={mouseEnterHandler}
                   onMouseLeave={mouseLeaveHandler}
