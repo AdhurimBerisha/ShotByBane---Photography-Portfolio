@@ -26,10 +26,8 @@ const Pricing = () => {
   useEffect(() => {
     fetchPackages();
 
-    // Subscribe to package changes
-    const subscription = subscribeToPackages((payload) => {
-      console.log("Package change:", payload);
-      fetchPackages(); // Refresh packages when changes occur
+    const subscription = subscribeToPackages(() => {
+      fetchPackages();
     });
 
     return () => {
@@ -59,7 +57,7 @@ const Pricing = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 dark:border-white"></div>
       </div>
     );
   }
@@ -97,20 +95,22 @@ const Pricing = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 * (index + 1) }}
-              className="bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8 hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] sm:h-[450px] lg:h-[500px]"
+              className="bg-white dark:bg-zinc-900/50 rounded-lg shadow-lg p-4 sm:p-6 lg:p-8 hover:shadow-xl transition-shadow duration-300 flex flex-col h-[400px] sm:h-[450px] lg:h-[500px]"
             >
               <div className="flex flex-col h-full">
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-black dark:text-white">
                     {pkg.name}
                   </h3>
-                  <div className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
+                  <div className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-black dark:text-white">
                     €{pkg.price}
                   </div>
-                  <ul className="space-y-2 sm:space-y-4 text-sm sm:text-base">
+                  <ul className="space-y-2 sm:space-y-4 text-sm sm:text-base text-gray-700 dark:text-gray-300">
                     {pkg.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-center">
-                        <span className="mr-2">✓</span>
+                        <span className="mr-2 text-primary dark:text-white">
+                          ✓
+                        </span>
                         {feature}
                       </li>
                     ))}
@@ -118,7 +118,7 @@ const Pricing = () => {
                 </div>
                 <button
                   onClick={() => handlePackageSelect(pkg)}
-                  className="py-2 sm:py-3 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors duration-300 mt-auto w-[160px] sm:w-[200px] mx-auto text-sm sm:text-base"
+                  className="py-2 sm:py-3 bg-primary text-white dark:bg-white dark:text-primary rounded-lg hover:bg-opacity-90 dark:hover:bg-opacity-90 transition-colors duration-300 mt-auto w-[160px] sm:w-[200px] mx-auto text-sm sm:text-base"
                   onMouseEnter={mouseEnterHandler}
                   onMouseLeave={mouseLeaveHandler}
                 >

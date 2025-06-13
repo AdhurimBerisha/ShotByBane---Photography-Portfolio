@@ -73,7 +73,7 @@ const Home = () => {
               animate={{ scale: 1 }}
               exit={{ scale: 0 }}
               transition={transition1}
-              className="relative lg:-right-40 overflow-hidden h-[400px] sm:h-[500px] md:h-[600px] lg:h-full pt-16 sm:pt-20 md:pt-24 lg:pt-28"
+              className="relative lg:-right-40 overflow-hidden h-[400px] sm:h-[500px] md:h-[600px] lg:h-full pt-32 sm:pt-36 md:pt-40 lg:pt-44"
               onMouseEnter={mouseEnterHandler}
               onMouseLeave={mouseLeaveHandler}
             >

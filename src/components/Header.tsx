@@ -37,7 +37,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed w-full px-[30px] lg:px-[100px] z-30 h-[100px] lg:h-[140px] flex items-center transition-transform duration-300 ${
+      className={`fixed w-full px-[30px] lg:px-[100px] z-30 h-[100px] lg:h-[140px] flex items-center transition-transform duration-300 bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-sm ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
@@ -57,31 +57,31 @@ const Header = () => {
         >
           <button
             onClick={() => scrollToSection("home")}
-            className="text-black hover:text-primary transition"
+            className="text-black dark:text-white hover:text-primary dark:hover:text-primary transition"
           >
             Home
           </button>
           <button
             onClick={() => scrollToSection("about")}
-            className="text-black hover:text-primary transition"
+            className="text-black dark:text-white hover:text-primary dark:hover:text-primary transition"
           >
             About
           </button>
           <button
             onClick={() => scrollToSection("portfolio")}
-            className="text-black hover:text-primary transition"
+            className="text-black dark:text-white hover:text-primary dark:hover:text-primary transition"
           >
             Portfolio
           </button>
           <button
             onClick={() => scrollToSection("packages")}
-            className="text-black hover:text-primary transition"
+            className="text-black dark:text-white hover:text-primary dark:hover:text-primary transition"
           >
             Packages
           </button>
           <button
             onClick={() => scrollToSection("contact")}
-            className="text-black hover:text-primary transition"
+            className="text-black dark:text-white hover:text-primary dark:hover:text-primary transition"
           >
             Contact
           </button>
