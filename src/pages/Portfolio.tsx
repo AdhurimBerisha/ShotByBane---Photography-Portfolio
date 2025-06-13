@@ -180,7 +180,7 @@ const Portfolio = () => {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
             onClick={loadMore}
-            className="btn bg-black text-white hover:bg-gray-800 text-sm sm:text-base"
+            className="btn bg-primary text-white dark:bg-white dark:text-primary rounded-lg hover:bg-opacity-90"
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
           >
@@ -194,7 +194,7 @@ const Portfolio = () => {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
             onClick={seeLess}
-            className="btn bg-gray-200 text-gray-800 hover:bg-gray-300 text-sm sm:text-base"
+            className="btn bg-primary text-white dark:bg-white dark:text-primary rounded-lg hover:bg-opacity-90"
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
           >
