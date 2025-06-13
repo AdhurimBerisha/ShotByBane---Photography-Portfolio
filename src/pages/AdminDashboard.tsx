@@ -5,7 +5,7 @@ import AddImageForm from "../components/AddImageForm";
 import ViewImagesList from "../components/ViewImagesList";
 import { transition1 } from "../transition";
 import { CursorContext } from "../context/CursorContext";
-import { useNavigate } from "react-router-dom";
+import ThemeToggle from "../components/ThemeToggle";
 
 const CATEGORIES = [
   "Nature",
@@ -19,15 +19,11 @@ const CATEGORIES = [
 const AdminDashboard = () => {
   const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
   const [activeTab, setActiveTab] = useState(0);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    // Push a new entry to history when component mounts
     window.history.pushState(null, "", window.location.href);
 
-    // Handle browser back button
     const handlePopState = () => {
-      // Silently prevent the default back navigation
       window.history.pushState(null, "", window.location.href);
     };
 
@@ -48,7 +44,7 @@ const AdminDashboard = () => {
       transition={transition1}
       className="min-h-screen bg-gray-50 dark:bg-[#0a0a0a]"
     >
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col lg:flex-row min-h-screen">
         {/* Sidebar */}
         <motion.div
           initial={{ x: -100, opacity: 0 }}
@@ -99,6 +95,7 @@ const AdminDashboard = () => {
           </motion.div>
         </motion.div>
       </div>
+      <ThemeToggle />
     </motion.section>
   );
 };

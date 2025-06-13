@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -11,22 +11,9 @@ import AdminDashboard from "./pages/AdminDashboard";
 import { motion } from "framer-motion";
 import { CursorContext } from "./context/CursorContext";
 import { PackageProvider } from "./context/PackageContext";
-import { ThemeProvider, useTheme } from "./context/ThemeContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-
-const ThemeToggle = () => {
-  const { theme, toggleTheme } = useTheme();
-
-  return (
-    <button
-      onClick={toggleTheme}
-      className="fixed bottom-4 right-3 p-3 text-2xl text-primary dark:text-white z-50 hover:scale-110 transition-transform"
-      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-    >
-      {theme === "light" ? "🌙" : "☀️"}
-    </button>
-  );
-};
+import ThemeToggle from "./components/ThemeToggle";
 
 const AppContent = () => {
   const { cursorVariants, cursorBG } = useContext(CursorContext)!;
