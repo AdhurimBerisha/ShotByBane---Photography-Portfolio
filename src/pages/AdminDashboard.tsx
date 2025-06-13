@@ -1,28 +1,44 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import AdminSidebar from "../components/AdminSidebar";
 import AddImageForm from "../components/AddImageForm";
 import ViewImagesList from "../components/ViewImagesList";
 import { transition1 } from "../transition";
 import { CursorContext } from "../context/CursorContext";
+import { useNavigate } from "react-router-dom";
 
 const CATEGORIES = [
-  "Portrait",
-  "Landscape",
-  "Wedding",
-  "Event",
-  "Commercial",
   "Nature",
-  "Street",
+  "Portrait",
   "Architecture",
-  "Fashion",
-  "Sports",
+  "Street",
+  "Animals",
+  "Abstract",
 ];
 
 const AdminDashboard = () => {
   const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
-
   const [activeTab, setActiveTab] = useState(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Push a new entry to history when component mounts
+    window.history.pushState(null, "", window.location.href);
+
+    // Handle browser back button
+    const handlePopState = () => {
+      // Silently prevent the default back navigation
+      window.history.pushState(null, "", window.location.href);
+    };
+
+    // Add event listener for popstate
+    window.addEventListener("popstate", handlePopState);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
 
   return (
     <motion.section

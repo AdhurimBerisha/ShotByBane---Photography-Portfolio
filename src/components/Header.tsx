@@ -3,12 +3,53 @@ import Socials from "./Socials";
 import MobileNav from "./MobileNav";
 import { CursorContext } from "../context/CursorContext";
 import { useTheme } from "../context/ThemeContext";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../supabase/supabaseClient";
 
 const Header = () => {
   const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
   const { theme } = useTheme();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (session) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", session.user.id)
+          .single();
+        setIsAdmin(profile?.role === "admin");
+      }
+    };
+
+    checkAdminStatus();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === "SIGNED_OUT") {
+        setIsAdmin(false);
+      } else if (session) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", session.user.id)
+          .single();
+        setIsAdmin(profile?.role === "admin");
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -94,6 +135,14 @@ const Header = () => {
           >
             Contact
           </button>
+          {isAdmin && (
+            <button
+              onClick={() => navigate("/admin/dashboard")}
+              className="text-black dark:text-white hover:text-primary dark:hover:text-primary transition"
+            >
+              Dashboard
+            </button>
+          )}
         </nav>
       </div>
       <Socials />

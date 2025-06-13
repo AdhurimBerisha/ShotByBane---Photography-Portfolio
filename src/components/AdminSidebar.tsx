@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FaPlusSquare, FaImages, FaSignOutAlt } from "react-icons/fa";
+import { FaPlusSquare, FaImages, FaSignOutAlt, FaHome } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { transition1 } from "../transition";
@@ -79,8 +79,15 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
         </button>
       </nav>
 
-      {/* Logout Button */}
-      <div className="px-4 pb-4">
+      {/* Bottom Buttons */}
+      <div className="px-4 pb-4 space-y-2">
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center w-full p-3 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
+        >
+          <FaHome className="mr-3 text-lg" />
+          <span className="font-medium">Go to Main Page</span>
+        </button>
         <button
           onClick={handleLogout}
           className="flex items-center w-full p-3 rounded-lg text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/50 hover:text-red-800 dark:hover:text-red-300 transition-all duration-300"
