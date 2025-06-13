@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { transition1 } from "../transition";
 import { CursorContext } from "../context/CursorContext";
@@ -11,12 +11,30 @@ const Contact = () => {
   const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
   const { selectedPackage, setSelectedPackage } = usePackage();
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+
+  const handleArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+
+    // Resize logic
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = "auto"; // Reset height
+      textarea.style.height = textarea.scrollHeight + "px"; // Set new height
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -137,13 +155,14 @@ const Contact = () => {
                 </div>
               )}
               <textarea
-                className="outline-none border-b border-b-primary h-[50px] sm:h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879] text-sm sm:text-base"
+                ref={textareaRef}
+                className="resize-none outline-none border-b border-b-primary min-h-[50px] sm:min-h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879] text-sm sm:text-base"
                 name="message"
                 placeholder="Your message"
                 value={formData.message}
-                onChange={handleChange}
+                onChange={handleArea}
                 required
-                rows={4}
+                rows={1}
               />
               <button
                 type="submit"
