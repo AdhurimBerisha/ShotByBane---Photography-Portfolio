@@ -14,12 +14,15 @@ const Socials = () => {
     >
       <ul className="flex gap-x-4">
         <li>
-          <a href="http://wwww.instagram.com" target="_blank">
+          <a
+            href="https://www.instagram.com/shotbybanee?igsh=MTl4cmFqdjB1M3R4ag=="
+            target="_blank"
+          >
             <FaInstagram />
           </a>
         </li>
         <li>
-          <a href="http://www.tiktok.com" target="_blank">
+          <a href="https://www.tiktok.com/@shotbybanee" target="_blank">
             <FaTiktok />
           </a>
         </li>
