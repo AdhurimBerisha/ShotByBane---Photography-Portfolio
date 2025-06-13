@@ -15,6 +15,6 @@
     @apply h-screen w-full;
   }
   .btn {
-    @apply py-[18px] px-[50px] h-[66px] flex items-center justify-center text-base uppercase font-secondary font-semibold bg-primary text-white dark:bg-white dark:text-primary transition-colors duration-200;
+    @apply py-[18px] px-[50px] h-[66px] flex items-center justify-center text-base uppercase font-secondary font-semibold bg-primary text-white dark:bg-white dark:text-primary transition-colors duration-200 rounded-lg;
   }
 }
