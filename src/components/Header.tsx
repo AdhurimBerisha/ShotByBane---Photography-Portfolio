@@ -2,9 +2,11 @@ import { useContext, useState, useEffect } from "react";
 import Socials from "./Socials";
 import MobileNav from "./MobileNav";
 import { CursorContext } from "../context/CursorContext";
+import { useTheme } from "../context/ThemeContext";
 
 const Header = () => {
   const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
+  const { theme } = useTheme();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -48,7 +50,14 @@ const Header = () => {
           onClick={() => scrollToSection("home")}
           className="max-w-[200px]"
         >
-          <img src="/images/header/logo.svg" alt="" />
+          <img
+            src={
+              theme === "light"
+                ? "/images/header/logo.svg"
+                : "/images/header/logo2.svg"
+            }
+            alt=""
+          />
         </button>
         <nav
           className="hidden xl:flex gap-x-12 font-semibold"
