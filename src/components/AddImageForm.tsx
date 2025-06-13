@@ -1,14 +1,17 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { supabase } from "../supabase/supabaseClient";
 import { createImage } from "../services/apiImages";
 import { motion } from "framer-motion";
 import { transition1 } from "../transition";
+import { CursorContext } from "../context/CursorContext";
 
 interface AddImageFormProps {
   CATEGORIES: string[];
 }
 
 const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
+  const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
+
   const [newImage, setNewImage] = useState({
     title: "",
     description: "",
@@ -90,6 +93,8 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={transition1}
       className="bg-white p-4 sm:p-6 lg:p-8 rounded-lg shadow-lg"
+      onMouseEnter={mouseEnterHandler}
+      onMouseLeave={mouseLeaveHandler}
     >
       <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 sm:mb-8">
         Add New Image

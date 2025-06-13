@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { getAllImages, deleteImage } from "../services/apiImages";
 import type { Image } from "../services/apiImages";
 import { supabase } from "../supabase/supabaseClient";
@@ -7,10 +7,13 @@ import { IoClose } from "react-icons/io5";
 import "react-photo-view/dist/react-photo-view.css";
 import { motion } from "framer-motion";
 import { transition1 } from "../transition";
+import { CursorContext } from "../context/CursorContext";
 
 const ITEMS_PER_PAGE = 8;
 
 const ViewImagesList: React.FC = () => {
+  const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
+
   const [images, setImages] = useState<Image[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -102,6 +105,8 @@ const ViewImagesList: React.FC = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={transition1}
       className="space-y-6 sm:space-y-8"
+      onMouseEnter={mouseEnterHandler}
+      onMouseLeave={mouseLeaveHandler}
     >
       <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 sm:mb-8">
         Current Images

@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { transition1 } from "../transition";
 import { signInAdmin } from "../services/apiAuth";
+import { CursorContext } from "../context/CursorContext";
 
 const AdminLogin = () => {
+  const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -36,6 +39,8 @@ const AdminLogin = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={transition1}
         className="w-full max-w-md"
+        onMouseEnter={mouseEnterHandler}
+        onMouseLeave={mouseLeaveHandler}
       >
         <div className="text-center mb-8">
           <img

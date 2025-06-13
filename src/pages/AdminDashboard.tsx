@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import AdminSidebar from "../components/AdminSidebar";
 import AddImageForm from "../components/AddImageForm";
 import ViewImagesList from "../components/ViewImagesList";
+import { transition1 } from "../transition";
+import { CursorContext } from "../context/CursorContext";
 
 const CATEGORIES = [
   "Portrait",
@@ -18,34 +20,70 @@ const CATEGORIES = [
 ];
 
 const AdminDashboard = () => {
+  const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
+
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section className="min-h-screen bg-gray-50">
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={transition1}
+      className="min-h-screen bg-gray-50"
+    >
       <div className="flex flex-col lg:flex-row">
         {/* Sidebar */}
-        <div className="w-full lg:w-[275px] min-h-[200px] lg:min-h-screen bg-white border-b lg:border-b-0 lg:border-r border-gray-200">
+        <motion.div
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ ...transition1, delay: 0.2 }}
+          className="w-full lg:w-[275px] min-h-[200px] lg:min-h-screen bg-white border-b lg:border-b-0 lg:border-r border-gray-200"
+          onMouseEnter={mouseEnterHandler}
+          onMouseLeave={mouseLeaveHandler}
+        >
           <AdminSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-        </div>
+        </motion.div>
 
         {/* Main Content */}
-        <div className="flex-1 p-4 sm:p-6 lg:p-8">
+        <motion.div
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ ...transition1, delay: 0.3 }}
+          className="flex-1 p-4 sm:p-6 lg:p-8"
+          onMouseEnter={mouseEnterHandler}
+          onMouseLeave={mouseLeaveHandler}
+        >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ ...transition1, delay: 0.4 }}
           >
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8">
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ ...transition1, delay: 0.5 }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8"
+              onMouseEnter={mouseEnterHandler}
+              onMouseLeave={mouseLeaveHandler}
+            >
               Admin Dashboard
-            </h1>
+            </motion.h1>
 
-            {activeTab === 0 && <AddImageForm CATEGORIES={CATEGORIES} />}
-
-            {activeTab === 1 && <ViewImagesList />}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ ...transition1, delay: 0.6 }}
+              onMouseEnter={mouseEnterHandler}
+              onMouseLeave={mouseLeaveHandler}
+            >
+              {activeTab === 0 && <AddImageForm CATEGORIES={CATEGORIES} />}
+              {activeTab === 1 && <ViewImagesList />}
+            </motion.div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

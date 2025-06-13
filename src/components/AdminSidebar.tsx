@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaPlusSquare, FaImages, FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { transition1 } from "../transition";
 import { supabase } from "../supabase/supabaseClient";
+import { CursorContext } from "../context/CursorContext";
 
 interface AdminSidebarProps {
   activeTab: number;
@@ -14,6 +15,8 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
   activeTab,
   setActiveTab,
 }) => {
+  const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
+
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
@@ -31,6 +34,8 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
       animate={{ opacity: 1, x: 0 }}
       transition={transition1}
       className="w-full h-full bg-white py-4 flex flex-col justify-between"
+      onMouseEnter={mouseEnterHandler}
+      onMouseLeave={mouseLeaveHandler}
     >
       {/* Logo Section */}
       <div className="flex justify-center items-center py-6 px-4 mb-4">
