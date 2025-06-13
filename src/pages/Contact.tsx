@@ -92,7 +92,7 @@ const Contact = () => {
             <h1 className="h1 text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 lg:mb-8">
               Contact me
             </h1>
-            <p className="text-base sm:text-lg md:text-xl mb-8 lg:mb-12 text-gray-600">
+            <p className="text-base sm:text-lg md:text-xl mb-8 lg:mb-12 text-gray-600 dark:text-white">
               Interested in a plan? Reach out and i'll be happy to help
             </p>
             {/* form */}

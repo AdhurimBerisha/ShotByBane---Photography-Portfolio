@@ -61,7 +61,7 @@ const Home = () => {
             </p>
             <button
               onClick={() => scrollToSection("contact")}
-              className="btn mb-[30px] text-sm sm:text-base"
+              className="btn mb-[30px] text-sm sm:text-base "
             >
               hire me
             </button>

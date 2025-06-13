@@ -92,21 +92,21 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={transition1}
-      className="bg-white p-4 sm:p-6 lg:p-8 rounded-lg shadow-lg"
+      className="bg-white dark:bg-[#0a0a0a] p-4 sm:p-6 lg:p-8 rounded-lg shadow-lg"
       onMouseEnter={mouseEnterHandler}
       onMouseLeave={mouseLeaveHandler}
     >
-      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 sm:mb-8">
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 sm:mb-8 text-black dark:text-white">
         Add New Image
       </h2>
       {error && (
-        <div className="mb-6 p-3 sm:p-4 bg-red-50 text-red-700 rounded-lg border border-red-200 text-sm sm:text-base">
+        <div className="mb-6 p-3 sm:p-4 bg-red-50 dark:bg-red-900/50 text-red-700 dark:text-red-200 rounded-lg border border-red-200 dark:border-red-800 text-sm sm:text-base">
           {error}
         </div>
       )}
       <form onSubmit={handleAddImage} className="space-y-4 sm:space-y-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Title
           </label>
           <input
@@ -115,12 +115,12 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
             onChange={(e) =>
               setNewImage({ ...newImage, title: e.target.value })
             }
-            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300 text-sm sm:text-base"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent transition-all duration-300 text-sm sm:text-base bg-white dark:bg-[#0a0a0a] text-black dark:text-white"
             required
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Description
           </label>
           <textarea
@@ -128,12 +128,12 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
             onChange={(e) =>
               setNewImage({ ...newImage, description: e.target.value })
             }
-            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300 text-sm sm:text-base"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent transition-all duration-300 text-sm sm:text-base bg-white dark:bg-[#0a0a0a] text-black dark:text-white"
             rows={3}
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Category
           </label>
           <select
@@ -141,7 +141,7 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
             onChange={(e) =>
               setNewImage({ ...newImage, category: e.target.value })
             }
-            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300 bg-white text-sm sm:text-base"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent transition-all duration-300 bg-white dark:bg-[#0a0a0a] text-black dark:text-white text-sm sm:text-base"
             required
           >
             {CATEGORIES.map((category) => (
@@ -152,7 +152,7 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Upload Image
           </label>
           <input
@@ -160,12 +160,12 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
             accept="image/*"
             onChange={handleFileChange}
             ref={fileInputRef}
-            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300 text-sm sm:text-base file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-black file:text-white hover:file:bg-gray-800"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent transition-all duration-300 text-sm sm:text-base file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-black dark:file:bg-white file:text-white dark:file:text-black hover:file:bg-gray-800 dark:hover:file:bg-gray-200"
             required
           />
           {imagePreviewUrl && (
             <div className="mt-4">
-              <p className="block text-sm font-medium text-gray-700 mb-2">
+              <p className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Image Preview:
               </p>
               <img
@@ -179,7 +179,7 @@ const AddImageForm: React.FC<AddImageFormProps> = ({ CATEGORIES }) => {
         <button
           type="submit"
           disabled={isUploading}
-          className="w-full px-4 sm:px-6 py-2 sm:py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+          className="w-full px-4 sm:px-6 py-2 sm:py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
         >
           {isUploading ? "Uploading..." : "Add Image"}
         </button>

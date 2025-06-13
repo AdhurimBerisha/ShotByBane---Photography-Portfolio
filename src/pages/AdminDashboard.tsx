@@ -30,7 +30,7 @@ const AdminDashboard = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={transition1}
-      className="min-h-screen bg-gray-50"
+      className="min-h-screen bg-gray-50 dark:bg-[#0a0a0a]"
     >
       <div className="flex flex-col lg:flex-row">
         {/* Sidebar */}
@@ -38,7 +38,7 @@ const AdminDashboard = () => {
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ ...transition1, delay: 0.2 }}
-          className="w-full lg:w-[275px] min-h-[200px] lg:min-h-screen bg-white border-b lg:border-b-0 lg:border-r border-gray-200"
+          className="w-full lg:w-[275px] min-h-[200px] lg:min-h-screen bg-white dark:bg-[#0a0a0a] border-b lg:border-b-0 lg:border-r border-gray-200 dark:border-gray-800"
           onMouseEnter={mouseEnterHandler}
           onMouseLeave={mouseLeaveHandler}
         >
@@ -63,7 +63,7 @@ const AdminDashboard = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...transition1, delay: 0.5 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 text-black dark:text-white"
               onMouseEnter={mouseEnterHandler}
               onMouseLeave={mouseLeaveHandler}
             >

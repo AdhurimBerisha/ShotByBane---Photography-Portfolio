@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { transition1 } from "../transition";
 import { supabase } from "../supabase/supabaseClient";
 import { CursorContext } from "../context/CursorContext";
+import { useTheme } from "../context/ThemeContext";
 
 interface AdminSidebarProps {
   activeTab: number;
@@ -16,6 +17,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
   setActiveTab,
 }) => {
   const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext)!;
+  const { theme } = useTheme();
 
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -33,14 +35,18 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={transition1}
-      className="w-full h-full bg-white py-4 flex flex-col justify-between"
+      className="w-full h-full bg-white dark:bg-[#0a0a0a] py-4 flex flex-col justify-between"
       onMouseEnter={mouseEnterHandler}
       onMouseLeave={mouseLeaveHandler}
     >
       {/* Logo Section */}
       <div className="flex justify-center items-center py-6 px-4 mb-4">
         <img
-          src="/images/header/logo.svg"
+          src={
+            theme === "light"
+              ? "/images/header/logo.svg"
+              : "/images/header/logo2.svg"
+          }
           alt="Logo"
           className="h-12 w-auto object-contain"
         />
@@ -52,8 +58,8 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
           className={`flex items-center w-full p-3 rounded-lg transition-all duration-300
             ${
               activeTab === 0
-                ? "bg-black text-white"
-                : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                ? "bg-black dark:bg-white text-white dark:text-black"
+                : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white"
             }`}
         >
           <FaPlusSquare className="mr-3 text-lg" />
@@ -64,8 +70,8 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
           className={`flex items-center w-full p-3 rounded-lg transition-all duration-300
             ${
               activeTab === 1
-                ? "bg-black text-white"
-                : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                ? "bg-black dark:bg-white text-white dark:text-black"
+                : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white"
             }`}
         >
           <FaImages className="mr-3 text-lg" />
@@ -77,7 +83,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
       <div className="px-4 pb-4">
         <button
           onClick={handleLogout}
-          className="flex items-center w-full p-3 rounded-lg text-red-600 hover:bg-red-50 hover:text-red-800 transition-all duration-300"
+          className="flex items-center w-full p-3 rounded-lg text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/50 hover:text-red-800 dark:hover:text-red-300 transition-all duration-300"
         >
           <FaSignOutAlt className="mr-3 text-lg" />
           <span className="font-medium">Logout</span>

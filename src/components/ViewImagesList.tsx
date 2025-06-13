@@ -90,13 +90,17 @@ const ViewImagesList: React.FC = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[200px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 dark:border-white"></div>
       </div>
     );
   }
 
   if (error) {
-    return <div className="text-red-500 text-center p-4">{error}</div>;
+    return (
+      <div className="text-red-500 dark:text-red-400 text-center p-4">
+        {error}
+      </div>
+    );
   }
 
   return (
@@ -108,7 +112,7 @@ const ViewImagesList: React.FC = () => {
       onMouseEnter={mouseEnterHandler}
       onMouseLeave={mouseLeaveHandler}
     >
-      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 sm:mb-8">
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 sm:mb-8 text-black dark:text-white">
         Current Images
       </h2>
 
@@ -118,8 +122,8 @@ const ViewImagesList: React.FC = () => {
           className={`px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300
             ${
               !selectedCategory
-                ? "bg-black text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                ? "bg-black dark:bg-white text-white dark:text-black"
+                : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
             }`}
         >
           All
@@ -131,8 +135,8 @@ const ViewImagesList: React.FC = () => {
             className={`px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300
               ${
                 selectedCategory === category
-                  ? "bg-black text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  ? "bg-black dark:bg-white text-white dark:text-black"
+                  : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
               }`}
           >
             {category}
@@ -161,7 +165,7 @@ const ViewImagesList: React.FC = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
-              className="bg-white rounded-lg shadow-lg overflow-hidden"
+              className="bg-white dark:bg-[#0a0a0a] rounded-lg shadow-lg overflow-hidden"
             >
               <PhotoView src={getImageUrl(image.image_path)}>
                 <div className="relative aspect-[4/3] group">
@@ -179,22 +183,22 @@ const ViewImagesList: React.FC = () => {
                 </div>
               </PhotoView>
               <div className="p-3 sm:p-4">
-                <h3 className="font-semibold text-base sm:text-lg mb-1">
+                <h3 className="font-semibold text-base sm:text-lg mb-1 text-black dark:text-white">
                   {image.title}
                 </h3>
                 {image.description && (
-                  <p className="text-gray-600 text-sm mb-2">
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
                     {image.description}
                   </p>
                 )}
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
                     {image.category}
                   </span>
                   <button
                     onClick={() => handleDeleteImage(image)}
                     disabled={isDeleting}
-                    className="text-red-500 hover:text-red-700 text-sm font-medium disabled:opacity-50 transition-colors duration-300"
+                    className="text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 text-sm font-medium disabled:opacity-50 transition-colors duration-300"
                   >
                     {isDeleting ? "Deleting..." : "Delete"}
                   </button>
@@ -206,7 +210,7 @@ const ViewImagesList: React.FC = () => {
       </PhotoProvider>
 
       {filteredImages.length === 0 && (
-        <div className="text-center text-gray-500 py-6 sm:py-8">
+        <div className="text-center text-gray-500 dark:text-gray-400 py-6 sm:py-8">
           No images found{selectedCategory ? ` in ${selectedCategory}` : ""}
         </div>
       )}
@@ -216,11 +220,11 @@ const ViewImagesList: React.FC = () => {
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            className="px-4 sm:px-6 py-2 rounded-lg bg-black text-white hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-sm sm:text-base"
+            className="px-4 sm:px-6 py-2 rounded-lg bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-sm sm:text-base"
           >
             Previous
           </button>
-          <span className="text-sm sm:text-base text-gray-700">
+          <span className="text-sm sm:text-base text-gray-700 dark:text-gray-300">
             Page {currentPage} of {totalPages}
           </span>
           <button
@@ -228,7 +232,7 @@ const ViewImagesList: React.FC = () => {
               setCurrentPage((prev) => Math.min(prev + 1, totalPages))
             }
             disabled={currentPage === totalPages}
-            className="px-4 sm:px-6 py-2 rounded-lg bg-black text-white hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-sm sm:text-base"
+            className="px-4 sm:px-6 py-2 rounded-lg bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-sm sm:text-base"
           >
             Next
           </button>
