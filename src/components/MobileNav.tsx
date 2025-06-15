@@ -1,6 +1,5 @@
 import { IoMdClose } from "react-icons/io";
 import { CgMenuRight } from "react-icons/cg";
-import { FaTiktok, FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
