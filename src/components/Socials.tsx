@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FaTiktok, FaFacebook, FaPinterest, FaInstagram } from "react-icons/fa";
+import { FaTiktok, FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 import { CursorContext } from "../context/CursorContext";
 
@@ -27,13 +27,19 @@ const Socials = () => {
           </a>
         </li>
         <li>
-          <a href="http://www.facebook.com" target="_blank">
+          <a
+            href="https://www.facebook.com/share/1YxwPSZJfw/?mibextid=wwXIfr"
+            target="_blank"
+          >
             <FaFacebook />
           </a>
         </li>
         <li>
-          <a href="http://www.pinterest.com" target="_blank">
-            <FaPinterest />
+          <a
+            href="https://x.com/shotbybane?s=21&t=NR57yCDcfimCXvBXN4u9yg"
+            target="_blank"
+          >
+            <FaTwitter />
           </a>
         </li>
       </ul>
