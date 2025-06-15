@@ -1,9 +1,11 @@
 import { IoMdClose } from "react-icons/io";
 import { CgMenuRight } from "react-icons/cg";
+import { FaTiktok, FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase/supabaseClient";
+import Socials from "./Socials";
 
 const menuVariants = {
   hidden: {
@@ -118,6 +120,10 @@ const MobileNav = () => {
               </button>
             </li>
           )}
+          {/* Social Links */}
+          <li className="mt-4">
+            <Socials variant="mobile" />
+          </li>
         </ul>
       </motion.div>
     </nav>
