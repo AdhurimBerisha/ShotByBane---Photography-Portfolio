@@ -98,14 +98,12 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       className={`relative overflow-hidden ${className}`}
       style={{ width, height }}
     >
-      {/* Loading placeholder */}
       {!isLoaded && !hasError && (
         <div className="absolute inset-0 bg-gray-200 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center">
           <div className="w-8 h-8 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
         </div>
       )}
 
-      {/* Error state */}
       {hasError && (
         <div className="absolute inset-0 bg-gray-100 dark:bg-gray-900 rounded-lg flex flex-col items-center justify-center p-4">
           <div className="text-gray-500 dark:text-gray-400 text-sm mb-2">
@@ -120,7 +118,6 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
         </div>
       )}
 
-      {/* Actual image */}
       {imageSrc && (
         <img
           ref={imgRef}
@@ -138,7 +135,6 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
         />
       )}
 
-      {/* Fallback image */}
       {hasError && fallback && (
         <img
           src={fallback}
