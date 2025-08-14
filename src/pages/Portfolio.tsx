@@ -8,6 +8,7 @@ import "react-photo-view/dist/react-photo-view.css";
 import { getAllImages } from "../services/apiImages";
 import { supabase } from "../supabase/supabaseClient";
 import type { Image } from "../services/apiImages";
+import OptimizedImage from "../components/OptimizedImage";
 
 const ITEMS_PER_PAGE = 8;
 
@@ -18,6 +19,16 @@ const Portfolio = () => {
   const [images, setImages] = useState<Image[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (images.length > 0) {
+      const imagesToPreload = images.slice(0, 4);
+      imagesToPreload.forEach((image) => {
+        const img = new window.Image();
+        img.src = getImageUrl(image.image_path);
+      });
+    }
+  }, [images]);
 
   useEffect(() => {
     fetchImages();
@@ -145,11 +156,10 @@ const Portfolio = () => {
                     onMouseEnter={mouseEnterHandler}
                     onMouseLeave={mouseLeaveHandler}
                   >
-                    <img
+                    <OptimizedImage
                       src={getImageUrl(image.image_path)}
                       alt={image.title}
                       className="w-full h-32 sm:h-40 md:h-48 object-cover cursor-pointer rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
                       onError={(e) => {
                         console.error(
                           "Image failed to load:",

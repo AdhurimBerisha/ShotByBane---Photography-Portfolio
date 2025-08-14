@@ -98,6 +98,8 @@ const Header = () => {
                 : "/images/header/logo2.svg"
             }
             alt=""
+            loading="eager"
+            decoding="sync"
           />
         </button>
         <nav

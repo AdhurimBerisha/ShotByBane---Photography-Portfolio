@@ -8,6 +8,7 @@ import "react-photo-view/dist/react-photo-view.css";
 import { motion } from "framer-motion";
 import { transition1 } from "../transition";
 import { CursorContext } from "../context/CursorContext";
+import OptimizedImage from "./OptimizedImage";
 
 const ITEMS_PER_PAGE = 8;
 
@@ -20,6 +21,16 @@ const ViewImagesList: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    if (images.length > 0) {
+      const imagesToPreload = images.slice(0, 4);
+      imagesToPreload.forEach((image) => {
+        const img = new window.Image();
+        img.src = getImageUrl(image.image_path);
+      });
+    }
+  }, [images]);
 
   useEffect(() => {
     fetchImages();
@@ -169,7 +180,7 @@ const ViewImagesList: React.FC = () => {
             >
               <PhotoView src={getImageUrl(image.image_path)}>
                 <div className="relative aspect-[4/3] group">
-                  <img
+                  <OptimizedImage
                     src={getImageUrl(image.image_path)}
                     alt={image.title}
                     className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"

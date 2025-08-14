@@ -14,7 +14,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
     const checkAuth = async () => {
       try {
-        // Get the current session
         const {
           data: { session },
           error: sessionError,
@@ -28,7 +27,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
           return;
         }
 
-        // Get user profile
         const { data: profile, error: profileError } = await supabase
           .from("profiles")
           .select("role")
@@ -50,17 +48,14 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
       }
     };
 
-    // Initial check
     checkAuth();
 
-    // Listen for auth changes
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_OUT") {
         setIsAuthenticated(false);
       } else if (session) {
-        // Only check profile if we have a session
         checkAuth();
       }
     });

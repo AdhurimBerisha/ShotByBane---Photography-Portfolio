@@ -35,6 +35,8 @@ const About = () => {
               src="/images/about/About.jpg"
               alt=""
               className="w-full h-full object-contain"
+              loading="eager"
+              decoding="sync"
             />
           </div>
           {/* text */}

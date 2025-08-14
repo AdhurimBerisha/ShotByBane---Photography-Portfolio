@@ -27,10 +27,8 @@ const AdminDashboard = () => {
       window.history.pushState(null, "", window.location.href);
     };
 
-    // Add event listener for popstate
     window.addEventListener("popstate", handlePopState);
 
-    // Cleanup
     return () => {
       window.removeEventListener("popstate", handlePopState);
     };

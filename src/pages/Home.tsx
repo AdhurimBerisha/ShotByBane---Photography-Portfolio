@@ -83,6 +83,8 @@ const Home = () => {
                 src="/images/home/Home.jpg"
                 alt=""
                 className="w-full h-full object-contain"
+                loading="eager"
+                decoding="sync"
               />
             </motion.div>
           </div>

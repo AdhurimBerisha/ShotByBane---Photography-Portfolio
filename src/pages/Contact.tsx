@@ -23,11 +23,10 @@ const Contact = () => {
   const handleArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
-    // Resize logic
     const textarea = textareaRef.current;
     if (textarea) {
-      textarea.style.height = "auto"; // Reset height
-      textarea.style.height = textarea.scrollHeight + "px"; // Set new height
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
     }
 
     setFormData((prev) => ({
@@ -190,6 +189,8 @@ const Contact = () => {
                 src="/images/contact/Contact.jpg"
                 alt="Contact"
                 className="w-full h-full object-contain"
+                loading="eager"
+                decoding="sync"
               />
             </div>
           </motion.div>
